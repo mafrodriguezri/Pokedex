@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Launch View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="LaunchViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashBackground2" translatesAutoresizingMaskIntoConstraints="NO" id="u3a-qR-dp6">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashBackground1" translatesAutoresizingMaskIntoConstraints="NO" id="I1M-sd-tM3">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="u3a-qR-dp6" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="OwJ-dh-0zY"/>
+                            <constraint firstItem="I1M-sd-tM3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="SIO-Sy-0ox"/>
+                            <constraint firstItem="I1M-sd-tM3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UzQ-4z-Z2N"/>
+                            <constraint firstItem="I1M-sd-tM3" firstAttribute="width" secondItem="u3a-qR-dp6" secondAttribute="width" id="ca7-CT-Kcd"/>
+                            <constraint firstItem="I1M-sd-tM3" firstAttribute="height" secondItem="u3a-qR-dp6" secondAttribute="height" id="gfR-jT-TRr"/>
+                            <constraint firstItem="u3a-qR-dp6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="iEk-lJ-VhX"/>
+                            <constraint firstItem="u3a-qR-dp6" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="sfb-7F-0jj"/>
+                            <constraint firstItem="u3a-qR-dp6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yWV-ZI-8zA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="AR2-0Y-4QQ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-207" y="35"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="SplashBackground1" width="375" height="812"/>
+        <image name="SplashBackground2" width="375" height="811"/>
+    </resources>
+</document>
