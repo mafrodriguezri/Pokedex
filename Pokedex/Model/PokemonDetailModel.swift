@@ -73,7 +73,8 @@ class PokemonDetailModel {
     func fillPokemonDetails() {
         if pokemonData.abilities?.first?.ability?.name != nil, pokemonSpeciesData.flavor_text_entries?.first?.language?.name != nil {
             pokemonDetails.name = pokemonData.species?.name
-            pokemonDetails.description = pokemonSpeciesData.flavor_text_entries?.first(where: {$0.language?.name == "en"})?.flavor_text
+            let apiDescrption = pokemonSpeciesData.flavor_text_entries?.first(where: {$0.language?.name == "en"})?.flavor_text ?? ""
+            pokemonDetails.description = apiDescrption.replacingOccurrences(of: "\n", with: " ")
             let stats = PokemonStatsEntity(hp: pokemonData.stats?.first(where: {$0.stat?.name == "hp"})?.base_stat,
                                            attack: pokemonData.stats?.first(where: {$0.stat?.name == "attack"})?.base_stat,
                                            defense: pokemonData.stats?.first(where: {$0.stat?.name == "defense"})?.base_stat,
@@ -94,7 +95,8 @@ class PokemonDetailModel {
             pokemonDetails.hatchCycles = pokemonSpeciesData.hatch_counter
             pokemonDetails.femaleRate = 100 * (Float(pokemonSpeciesData.gender_rate ?? 0) / 8)
             pokemonDetails.habitat = pokemonSpeciesData.habitat?.name
-            pokemonDetails.generation = pokemonSpeciesData.generation?.name
+            let genNumber = ((pokemonSpeciesData.generation?.name ?? "").components(separatedBy: "-").last ?? "").uppercased()
+            pokemonDetails.generation = genNumber
             pokemonDetails.captureRate = pokemonSpeciesData.capture_rate
             pokemonDetails.spriteStandardUrl = pokemonData.sprites?.front_default
             pokemonDetails.spriteShinyUrl = pokemonData.sprites?.front_shiny

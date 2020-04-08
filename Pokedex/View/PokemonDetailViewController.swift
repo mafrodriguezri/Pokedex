@@ -11,6 +11,7 @@ import YYWebImage
 
 class PokemonDetailViewController: UIViewController {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var pokemonNameLabel: UILabel!
     @IBOutlet weak var pokemonImageView: UIImageView!
@@ -91,9 +92,9 @@ class PokemonDetailViewController: UIViewController {
         secondAbilityLabel.text = (pokemonDetail?.abilities?.ability2Name ?? "").capitalized
         hiddenAbilityLabel.text = (pokemonDetail?.abilities?.abilityHiddenName ?? "").capitalized
         let eggGroupCount = pokemonDetail?.eggGroups?.count ?? 0
-        eggGroup1Label.text = (pokemonDetail?.eggGroups?[0] ?? "").capitalized
+        eggGroup1Label.text = (pokemonDetail?.eggGroups?.first ?? "").capitalized
         eggGroup2Label.text = eggGroupCount > 1 ? (pokemonDetail?.eggGroups?[1] ?? "").capitalized : ""
-        hatchStepsLabel.text = "\((pokemonDetail?.hatchCycles ?? 0)*255) steps"
+        hatchStepsLabel.text = "\(pokemonDetail?.hatchSteps ?? 0) steps"
         hatchCyclesLabel.text = "\(pokemonDetail?.hatchCycles ?? 0) cycles"
         let femaleRate = (pokemonDetail?.femaleRate ?? 0) < 0 ? 0 : (pokemonDetail?.femaleRate ?? 0)
         let maleRate = (pokemonDetail?.femaleRate ?? 0) < 0 ? 0 : 100 - femaleRate
@@ -134,6 +135,12 @@ class PokemonDetailViewController: UIViewController {
     
     func hideViews(_ boolean: Bool) {
         self.view.subviews.forEach{$0.isHidden = boolean}
+        showActivityIndicator(boolean)
+    }
+    
+    func showActivityIndicator(_ boolean: Bool){
+        activityIndicator.isHidden = !boolean
+        _ = boolean ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
     }
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
