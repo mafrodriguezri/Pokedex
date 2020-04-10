@@ -38,3 +38,13 @@ struct PokemonWithType : Codable {
     var typeSlot : Int?
     var typeName: String?
 }
+
+struct TypeWithWeakness : Codable {
+    var typeName : String?
+    var typeWeakTo : [WeaknessValue]?
+}
+
+struct WeaknessValue : Codable {
+    var typeName : String?
+    var multiplier : Float?
+}

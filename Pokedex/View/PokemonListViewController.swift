@@ -65,8 +65,12 @@ extension PokemonListViewController : UITableViewDelegate, UITableViewDataSource
         pokemonDetailViewController.modalPresentationStyle = .fullScreen
         if let pokemonCell = tableView.cellForRow(at: indexPath) as? PokemonTableViewCell {
             pokemonDetailViewController.pokemonId = pokemonCell.pokemonId
-            pokemonDetailViewController.firstTypeData = pokemonTypesViewModel.pokemonTypesArray.filter{$0.name == pokemonCell.firstType}.first
-            pokemonDetailViewController.secondTypeData = pokemonTypesViewModel.pokemonTypesArray.filter{$0.name == pokemonCell.secondType}.first
+            let firstTypeName = pokemonCell.firstType
+            let secondTypeName = pokemonCell.secondType
+            pokemonDetailViewController.firstTypeName = firstTypeName
+            pokemonDetailViewController.secondTypeName = secondTypeName
+            pokemonDetailViewController.firstTypeWeaknesses = pokemonTypesViewModel.typesWithWeaknesses.first(where: {$0.typeName == firstTypeName})
+            pokemonDetailViewController.secondTypeWeaknesses = pokemonTypesViewModel.typesWithWeaknesses.first(where: {$0.typeName == secondTypeName})
             self.present(pokemonDetailViewController, animated: true)
         }
     }

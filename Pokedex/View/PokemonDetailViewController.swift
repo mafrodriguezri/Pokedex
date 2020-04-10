@@ -67,8 +67,28 @@ class PokemonDetailViewController: UIViewController {
     let pokemonDetailViewModel = PokemonDetailViewModel()
     
     var pokemonId : Int = 0
-    var firstTypeData : PokemonType?
-    var secondTypeData : PokemonType?
+    var firstTypeName : String?
+    var secondTypeName : String?
+    var firstTypeWeaknesses : TypeWithWeakness?
+    var secondTypeWeaknesses : TypeWithWeakness?
+    var bugMultiplier : Float = 1
+    var darkMultiplier : Float = 1
+    var dragonMultiplier : Float = 1
+    var electricMultiplier : Float = 1
+    var fairyMultiplier : Float = 1
+    var fightingMultiplier : Float = 1
+    var fireMultiplier : Float = 1
+    var flyingMultiplier : Float = 1
+    var ghostMultiplier : Float = 1
+    var grassMultiplier : Float = 1
+    var groundMultiplier : Float = 1
+    var iceMultiplier : Float = 1
+    var normalMultiplier : Float = 1
+    var poisonMultiplier : Float = 1
+    var psychicMultiplier : Float = 1
+    var rockMultiplier : Float = 1
+    var steelMultiplier : Float = 1
+    var waterMultiplier : Float = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,14 +100,15 @@ class PokemonDetailViewController: UIViewController {
     
     func showPokemonData() {
         let pokemonDetail = pokemonDetailViewModel.pokemonDetail
-        backgroundImageView.image = UIImage(named: getDetailBackground(pokemonType: firstTypeData?.name ?? ""))
+        backgroundImageView.image = UIImage(named: getDetailBackground(pokemonType: firstTypeName ?? ""))
         pokemonImageView.image = UIImage(named: pokemonId.format3Digits())
         pokemonNameLabel.text = (pokemonDetail?.name ?? "").capitalized
-        firstTypeTagImageView.image = UIImage(named: getDetailTypeTag(pokemonType: firstTypeData?.name ?? ""))
-        secondTypeTagImageView.image = UIImage(named: getDetailTypeTag(pokemonType: secondTypeData?.name ?? ""))
-        secondTypeTagImageView.isHidden = secondTypeData == nil
+        firstTypeTagImageView.image = UIImage(named: getDetailTypeTag(pokemonType: firstTypeName ?? ""))
+        secondTypeTagImageView.image = UIImage(named: getDetailTypeTag(pokemonType: secondTypeName ?? ""))
+        secondTypeTagImageView.isHidden = (secondTypeName == nil || secondTypeName == "")
         descriptionLabel.text = pokemonDetail?.description
         fillStats(pokemonDetail: pokemonDetail)
+        showWeaknesses()
         firstAbilityLabel.text = (pokemonDetail?.abilities?.ability1Name ?? "").capitalized
         secondAbilityLabel.text = (pokemonDetail?.abilities?.ability2Name ?? "").capitalized
         hiddenAbilityLabel.text = (pokemonDetail?.abilities?.abilityHiddenName ?? "").capitalized
@@ -104,6 +125,76 @@ class PokemonDetailViewController: UIViewController {
         generationLabel.text = (pokemonDetail?.generation ?? "")
         captureRateLabel.text = "\(pokemonDetail?.captureRate ?? 0)"
         getSprites(pokemonDetail: pokemonDetail)
+    }
+    
+    func showWeaknesses() {
+        let firstTypeWeaknessesValue = firstTypeWeaknesses?.typeWeakTo ?? []
+        let secondTypeWeaknessesValue = secondTypeWeaknesses?.typeWeakTo ?? []
+        updateWeaknessMultipliers(weaknessValues: firstTypeWeaknessesValue)
+        updateWeaknessMultipliers(weaknessValues: secondTypeWeaknessesValue)
+        bugWeakLabel.text = bugMultiplier.clean + "x"
+        darkWeakLabel.text = darkMultiplier.clean + "x"
+        dragonWeakLabel.text = dragonMultiplier.clean + "x"
+        electricWeakLabel.text = electricMultiplier.clean + "x"
+        fairyWeakLabel.text = fairyMultiplier.clean + "x"
+        fightingWeakLabel.text = fightingMultiplier.clean + "x"
+        fireWeakLabel.text = fireMultiplier.clean + "x"
+        flyingWeakLabel.text = flyingMultiplier.clean + "x"
+        ghostWeakLabel.text = ghostMultiplier.clean + "x"
+        grassWeakLabel.text = grassMultiplier.clean + "x"
+        groundWeakLabel.text = groundMultiplier.clean + "x"
+        iceWeakLabel.text = iceMultiplier.clean + "x"
+        normalWeakLabel.text = normalMultiplier.clean + "x"
+        poisonWeakLabel.text = poisonMultiplier.clean + "x"
+        psychicWeakLabel.text = psychicMultiplier.clean + "x"
+        rockWeakLabel.text = rockMultiplier.clean + "x"
+        steelWeakLabel.text = steelMultiplier.clean + "x"
+        waterWeakLabel.text = waterMultiplier.clean + "x"
+    }
+    
+    func updateWeaknessMultipliers(weaknessValues: [WeaknessValue]) {
+        for typeWeakTo in weaknessValues {
+            switch typeWeakTo.typeName ?? "" {
+            case type.bug.rawValue:
+                bugMultiplier = bugMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.dark.rawValue:
+                darkMultiplier = darkMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.dragon.rawValue:
+                dragonMultiplier = dragonMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.electric.rawValue:
+                electricMultiplier = electricMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.fairy.rawValue:
+                fairyMultiplier = fairyMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.fighting.rawValue:
+                fightingMultiplier = fightingMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.fire.rawValue:
+                fireMultiplier = fireMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.flying.rawValue:
+                flyingMultiplier = flyingMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.ghost.rawValue:
+                ghostMultiplier = ghostMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.grass.rawValue:
+                grassMultiplier = grassMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.ground.rawValue:
+                groundMultiplier = groundMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.ice.rawValue:
+                iceMultiplier = iceMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.normal.rawValue:
+                normalMultiplier = normalMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.poison.rawValue:
+                poisonMultiplier = poisonMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.psychic.rawValue:
+                psychicMultiplier = psychicMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.rock.rawValue:
+                rockMultiplier = rockMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.steel.rawValue:
+                steelMultiplier = steelMultiplier * (typeWeakTo.multiplier ?? 1)
+            case type.water.rawValue:
+                waterMultiplier = waterMultiplier * (typeWeakTo.multiplier ?? 1)
+            default:
+                break
+            }
+        }
     }
     
     func fillStats(pokemonDetail: PokemonDetailEntity?) {
